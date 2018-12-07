@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import StoreList from '../Store/StoreList';
-import DATA from '../data';
-import './Explore.css';
+import StoreList from '../../components/StoreList';
+import './StoreExplorePage.css';
 
 class StoreExplorePage extends Component {
   constructor() {
@@ -14,7 +13,6 @@ class StoreExplorePage extends Component {
       <div className="container">
         <div className="stores">
           <h2>Stores</h2>
-          <StoreList data={DATA} />
         </div>
       </div>
     );

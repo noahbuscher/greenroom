@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import StoreList from '../Store/StoreList';
-import DATA from '../data';
-import './Explore.css';
+import './StoreCreatePage.css';
 
 class StoreCreatePage extends Component {
   constructor(props) {

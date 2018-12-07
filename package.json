@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:server": "cd server && nodemon server.js --exec babel-node",
+    "start:server": "cd server && nodemon --exec babel-node server.js",
     "start:client": "cd client && yarn start",
     "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\""
   },

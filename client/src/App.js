@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+/**
+* Root Component
+*/
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+// Import Routes
+import routes from './routes';
+
+export default function App(props) {
+  return (
+    <Provider store={props.store}>
+      <Router history={browserHistory}>
+       {routes}
+      </Router>
+    </Provider>
+  );
 }
 
-export default App;
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+};

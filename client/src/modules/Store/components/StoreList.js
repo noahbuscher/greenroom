@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import Store from './Store';
 
 const StoreList = (props) => {
-  //const storeNodes = props.data.map(store => {
-  //  <Store store={store} key={store._id} />
-  //});
-  const storeNodes = [
-    <Store store={{}} key={0} />
-  ];
+  const { data } = props;
+
+  const storeNodes = data.map((store) => {
+    <Store store={store} key={store._id} />
+  });
 
   return (
     <div>

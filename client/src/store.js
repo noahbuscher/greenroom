@@ -6,9 +6,6 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 export function configureStore(initialState = {}) {
-  const enhancers = [
-    applyMiddleware(thunk),
-  ];
-  const store = createStore(rootReducer, initialState, compose(...enhancers));
+  const store = createStore(rootReducer, applyMiddleware(thunk));
   return store;
 }

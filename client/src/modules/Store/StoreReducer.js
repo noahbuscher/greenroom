@@ -1,13 +1,13 @@
 import { ADD_STORES } from './StoreActions';
 
 const initialState = {
-  stores: []
+  locations: []
 };
 
-export function StoreReducer(state = initialState, action) {
+export default function StoreReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_STORES:
-      return Object.assign({}, state, { stores: action.stores });
+      return Object.assign({}, state, { locations: action.stores });
 
     default:
       return state;

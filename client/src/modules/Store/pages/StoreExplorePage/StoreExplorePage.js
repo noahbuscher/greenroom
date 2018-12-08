@@ -15,7 +15,7 @@ class StoreExplorePage extends Component {
 
   render() {
     const { stores } = this.props;
-
+    console.log('test', stores);
     return (
       <div>
         <Header />
@@ -27,8 +27,8 @@ class StoreExplorePage extends Component {
         </section>
 
         <section className="cf ph3 ph5-ns pb5 pv5 bg-white black-70">
-          {stores.length > 0 && (
-            <StoreList stores={stores} />
+          {stores.locations.length > 0 && (
+            <StoreList stores={stores.locations} />
           )}
         </section>
       </div>
@@ -37,12 +37,8 @@ class StoreExplorePage extends Component {
 }
 
 function mapStateToProps(state) {
-  const stores = state.stores || [];
-
-  console.log(stores);
-
   return {
-    stores,
+    stores: state.stores,
   };
 }
 

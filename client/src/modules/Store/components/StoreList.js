@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Store from './Store';
-import { fetchStores } from '../StoreActions';
 
 export default class StoreList extends Component {
   render() {
+    const { stores } = this.props;
     return (
-    <ul>
-        {this.props.stores.map((store, i) => (
-          <li key={i}>{store.name}</li>
+      <div className="flex flex-wrap">
+        {stores.map((store) => (
+          <Store key={store.cuid} store={store} />
         ))}
-      </ul>
+      </div>
     );
   }
 }

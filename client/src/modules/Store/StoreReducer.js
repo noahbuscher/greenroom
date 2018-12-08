@@ -1,7 +1,7 @@
 import { ADD_STORES } from './StoreActions';
 
 const initialState = {
-  locations: []
+  locations: [],
 };
 
 export default function StoreReducer(state = initialState, action) {

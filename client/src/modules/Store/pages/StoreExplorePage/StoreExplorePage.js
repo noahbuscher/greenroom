@@ -15,7 +15,6 @@ class StoreExplorePage extends Component {
 
   render() {
     const { stores } = this.props;
-    console.log('test', stores);
     return (
       <div>
         <Header />
@@ -26,7 +25,8 @@ class StoreExplorePage extends Component {
           </p>
         </section>
 
-        <section className="cf ph3 ph5-ns pb5 pv5 bg-white black-70">
+        <section className="cf ph5-ns pb5 pv4 bg-white black-70">
+          <h2>Recently Updated</h2>
           {stores.locations.length > 0 && (
             <StoreList stores={stores.locations} />
           )}

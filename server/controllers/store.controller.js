@@ -1,6 +1,5 @@
 import Store from '../models/store.model';
 import cuid from 'cuid';
-import slug from 'limax';
 import randomstring from 'randomstring';
 import sanitizeHtml from 'sanitize-html';
 
@@ -13,8 +12,9 @@ import sanitizeHtml from 'sanitize-html';
 export function getStores(req, res) {
   Store.find().sort('-dateAdded').exec((err, stores) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
+
     res.json({ stores });
   });
 }
@@ -27,7 +27,7 @@ export function getStores(req, res) {
  */
 export function addStore(req, res) {
   if (!req.body.store) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
   const newStore = new Store();
@@ -38,9 +38,9 @@ export function addStore(req, res) {
   newStore.city = sanitizeHtml(req.body.store.city);
   newStore.state = sanitizeHtml(req.body.store.state);
 
-  const slug = randomstring.generate(4) + '-' + slug(newStore.name);
-  newTrail.cuid = cuid();
-  newTrail.slug = slug;
+  const slug = randomstring.generate(6);
+  newStore.cuid = cuid();
+  newStore.slug = slug;
 
   newStore.save((err, saved) => {
     if (err) {
@@ -59,8 +59,9 @@ export function addStore(req, res) {
 export function getStore(req, res) {
   Store.findOne({ slug: req.params.slug }).exec((err, store) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
+
     res.json({ store });
   });
 }

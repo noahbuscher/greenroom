@@ -8,23 +8,19 @@ import config from './config';
 const app = express();
 const router = express.Router();
 
-mongoose.connect(config.mongoURL);
+// Connect to DB
+mongoose.connect(config.mongoURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(logger('dev'));
-
-import stores from './routes/store.routes';
-
+// Set up app
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use('/api', stores);
+app.use(logger('dev'));
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Hello, world! '});
-});
+// Link routes
+import stores from './routes/store.routes';
+app.use('/api', stores);
 
 // Start app
 app.listen(config.port, (error) => {

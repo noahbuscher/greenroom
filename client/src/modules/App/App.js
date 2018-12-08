@@ -21,7 +21,7 @@ class App extends Component {
             an exhaustive, unbiased listing of legal cannabis dispensaries through
             crowdsourcing and curation.
           </p>
-          <a href="#" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline">
+          <a href="/explore" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline">
             Explore Stores
           </a>
         </section>

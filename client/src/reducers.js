@@ -1,12 +1,12 @@
 /**
- * Root Reducer
+ * Root reducer
  */
 import { combineReducers } from 'redux';
 
-// Import Reducers
-import store from './modules/Store/StoreReducer';
+// Import reducers
+import { StoreReducer } from './modules/Store/StoreReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
-  store,
+  StoreReducer,
 });

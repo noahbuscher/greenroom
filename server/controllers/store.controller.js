@@ -15,7 +15,7 @@ export function getStores(req, res) {
       return res.status(500).send(err);
     }
 
-    res.json({ stores });
+    res.status(200).json({ stores });
   });
 }
 

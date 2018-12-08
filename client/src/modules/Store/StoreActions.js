@@ -21,11 +21,12 @@ export function addStoreRequest(store) {
 export function addStores(stores) {
   return {
     type: ADD_STORES,
-    stores,
+    stores
   };
 }
 
 export function fetchStores() {
+  console.log('Fetching...');
   return (dispatch) => {
     return callApi('stores').then(res => {
       dispatch(addStores(res.json.stores));

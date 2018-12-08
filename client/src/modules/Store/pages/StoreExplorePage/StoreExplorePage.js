@@ -8,13 +8,14 @@ import '../../../../index.css';
 import { fetchStores } from '../../StoreActions';
 
 class StoreExplorePage extends Component {
-  constructor() {
-    super();
-    this.state = { data: [] };
-    //fetchStores();
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchStores());
   }
 
   render() {
+    const { stores } = this.props;
+
     return (
       <div>
         <Header />
@@ -26,8 +27,9 @@ class StoreExplorePage extends Component {
         </section>
 
         <section className="cf ph3 ph5-ns pb5 pv5 bg-white black-70">
-          <h2>Recently Updated</h2>
-          <StoreList />
+          {stores.length > 0 && (
+            <StoreList stores={stores} />
+          )}
         </section>
       </div>
     );
@@ -35,10 +37,13 @@ class StoreExplorePage extends Component {
 }
 
 function mapStateToProps(state) {
+  const stores = state.stores || [];
+
+  console.log(stores);
+
   return {
-    stores: fetchStores(state),
+    stores,
   };
 }
-
 
 export default connect(mapStateToProps)(StoreExplorePage);

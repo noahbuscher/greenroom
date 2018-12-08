@@ -18,6 +18,16 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(logger('dev'));
 
+/**
+ * NOTE: This allows CORS as dev server/client
+ * are on diff ports
+ */
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Link routes
 import stores from './routes/store.routes';
 app.use('/api', stores);

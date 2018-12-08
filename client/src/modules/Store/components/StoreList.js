@@ -5,13 +5,8 @@ import Store from './Store';
 const StoreList = (props) => {
   const { data } = props;
 
-  const storeNodes = data.map((store) => {
-    <Store store={store} key={store._id} />
-  });
-
   return (
     <div>
-      { storeNodes }
     </div>
   );
 };

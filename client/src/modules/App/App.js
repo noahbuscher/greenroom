@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../../css/app.css';
 
 class App extends Component {
   constructor(props) {
@@ -9,11 +10,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          TEST
-        </div>
-      </div>
+      <section className="cf ph3 ph5-ns pb5 bg-green black-70">
+        <h1 className="f4 f1-ns fw6 mb2">Greenroom</h1>
+        <h2 className="f6 fw2 ttu tracked">Cannabis Dispensary Database</h2>
+      </section>
     );
   }
 }

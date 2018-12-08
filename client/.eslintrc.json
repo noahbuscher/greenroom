@@ -20,6 +20,7 @@
     "no-confusing-arrow": [0],
     "no-underscore-dangle": [0],
     "import/no-extraneous-dependencies": [0],
-    "react/no-unused-state": [0]
+    "react/no-unused-state": [0],
+    "react/prefer-stateless-function": [0] 
   }
 }

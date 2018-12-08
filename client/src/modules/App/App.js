@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
-import '../../css/app.css';
+import '../../index.css';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
         <Header />
         <section className="cf ph3 ph5-ns pb5 bg-green black-70">
           <h1 className="f4 pt3 f1-ns fw6 mb2">Greenroom</h1>
-          <h2 className="f6 fw2 pb3 ttu tracked">Cannabis Dispensary Database</h2>
+          <h2 className="f6 fw2 pb3 ttu tracked">For Flowhub</h2>
           <p className="mv0 f5 pb4 lh-copy measure">
             Greenroom picks up where online review sites leave off, providing
             an exhaustive, unbiased listing of legal cannabis dispensaries through

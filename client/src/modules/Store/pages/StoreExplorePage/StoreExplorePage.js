@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import StoreList from '../../components/StoreList';
 import Header from '../../../../components/Header/Header';
-import '../../../../css/app.css';
+import '../../../../index.css';
+
+// Import Selectors
+import { fetchStores } from '../../StoreActions';
 
 class StoreExplorePage extends Component {
   constructor() {
     super();
     this.state = { data: [] };
+    //fetchStores();
   }
 
   render() {
@@ -22,10 +27,18 @@ class StoreExplorePage extends Component {
 
         <section className="cf ph3 ph5-ns pb5 pv5 bg-white black-70">
           <h2>Recently Updated</h2>
+          <StoreList />
         </section>
       </div>
     );
   }
 }
 
-export default StoreExplorePage;
+function mapStateToProps(state) {
+  return {
+    stores: fetchStores(state),
+  };
+}
+
+
+export default connect(mapStateToProps)(StoreExplorePage);

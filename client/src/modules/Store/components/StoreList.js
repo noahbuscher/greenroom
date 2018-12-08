@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import Store from './Store';
 
 const StoreList = (props) => {
-  const { data } = props;
+  const { stores } = props;
 
   return (
     <div>
+      {stores.map(function(store, index) {
+        return <Store key={store.cuid} store={store} />;
+      })}
     </div>
   );
 };
 
 StoreList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  stores: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     street: PropTypes.string,
     city: PropTypes.string,
@@ -21,7 +24,7 @@ StoreList.propTypes = {
 };
 
 StoreList.defaultProps = {
-  data: [],
+  stores: [],
 };
 
 export default StoreList;

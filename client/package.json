@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "css": "tachyons src/css/app.css > src/index.css --minify",
+    "css": "tachyons src/css/_app.css > src/index.css --minify",
     "prestart": "npm run css",
     "prebuild": "npm run css"
   },

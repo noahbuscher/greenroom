@@ -6,7 +6,7 @@ export default class StoreList extends Component {
   render() {
     const { stores } = this.props;
     return (
-      <div className="flex flex-wrap">
+      <div className="center cf">
         {stores.map((store) => (
           <Store key={store.cuid} store={store} />
         ))}

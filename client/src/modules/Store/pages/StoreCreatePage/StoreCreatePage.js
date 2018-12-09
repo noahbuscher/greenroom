@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from '../../../../components/Header/Header';
 
-import { addStoreRequest } from '../../StoreActions';
+import { addStoreRequest, requestUploadStore } from '../../StoreActions';
 
 class StoreCreatePage extends Component {
   constructor(props) {
@@ -16,10 +16,27 @@ class StoreCreatePage extends Component {
       street: '',
       city: '',
       state: '',
+      selectedFile: null,
     };
 
     this.handleChangeText = this.handleChangeText.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSelectedFile = (event) => {
+    this.setState({
+      selectedFile: event.target.files[0],
+    });
+  }
+
+  handleUpload = () => {
+    const { onUpload } = this.props;
+    const { selectedFile } = this.state;
+
+    const data = new FormData();
+    data.append('csv', selectedFile, 'csv');
+
+    onUpload(data).then(() => this.setState(() => ({ toExplore: true })));
   }
 
   handleSubmit() {
@@ -71,7 +88,12 @@ class StoreCreatePage extends Component {
           </p>
         </section>
 
-        <section className="cf ph5-ns pb5 pv4 bg-white black-70">
+        <section className="fl w-50 pa2 cf ph5-ns pb5 pv4 bg-white black-70">
+          <h2>Add Listing</h2>
+          <p className="mv0 f5 pb4 lh-copy measure">
+            This is helpful for keeping the database up to date with indivigual
+            dispensary entries.
+          </p>
           <form>
             <div className="measure">
               <label htmlFor="name" className="f6 b db mb2">Store Name</label>
@@ -135,6 +157,24 @@ class StoreCreatePage extends Component {
             </div>
           </form>
         </section>
+        <section className="fl w-50 pa2 cf ph5-ns pb5 pv4 bg-white black-70">
+          <h2>Upload CSV</h2>
+          <p className="mv0 f5 pb4 lh-copy measure">
+            Good for importing large data sets. Make sure your CSV file has
+            the following four columns (lowercased):&nbsp;
+            <span className="code bg-yellow">name, street, city, state</span>.
+          </p>
+          <form onSubmit={this.handleUpload}>
+            <input name="csv" id="csv" onChange={this.handleSelectedFile} type="file" />
+            <button
+              className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline mt4"
+              type="button"
+              onClick={this.handleUpload}
+            >
+              Import
+            </button>
+          </form>
+        </section>
       </div>
     );
   }
@@ -142,10 +182,12 @@ class StoreCreatePage extends Component {
 
 StoreCreatePage.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: data => dispatch(addStoreRequest(data)),
+  onUpload: data => dispatch(requestUploadStore(data)),
 });
 
 export default connect(null, mapDispatchToProps)(StoreCreatePage);

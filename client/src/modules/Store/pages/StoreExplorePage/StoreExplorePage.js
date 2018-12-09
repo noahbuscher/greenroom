@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StoreList from '../../components/StoreList';
 import Header from '../../../../components/Header/Header';
+import Footer from '../../../../components/Footer/Footer';
 import '../../../../index.css';
 
 // Import Selectors
@@ -24,7 +25,12 @@ class StoreExplorePage extends Component {
           <h2 className="f3 f1-ns fw6 mb2 lh-copy">Explore</h2>
           <p className="mv0 f5 pb4 lh-copy measure">
             Browse dispensaries by city and state.
+            If you don&#39;t see one you&#39;re looking for, you can add a new
+            listing.
           </p>
+          <a href="/new" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 mb4 grow no-underline">
+            New Listing
+          </a>
         </section>
 
         <section className="cf ph5-ns pb5 pv4 bg-white black-70">
@@ -34,6 +40,8 @@ class StoreExplorePage extends Component {
             <StoreList stores={stores.locations} dispatch={dispatch} />
           )}
         </section>
+
+        <Footer />
       </div>
     );
   }

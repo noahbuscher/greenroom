@@ -44,7 +44,7 @@ class Store extends Component {
       <div className="fl w-50 w-25-m w-25-l pr2 pb2 relative">
         <article className="br2 ba b--black-10 w-100 h5 fl">
           <div className={`db w-100 br2 br--top pa1 pl3 pr3 ${statusColor}`}>
-            <h2 className="f5 black-70 w-100">
+            <h2 className="f5 fw5 black-70 w-100">
               {store.city}, {store.state}
               {stateStore.status === 'onboarded' && (
                 <span className="tr" role="img" aria-label="Liftoff"> 🚀</span>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import '../../index.css';
 
 class App extends Component {
@@ -24,6 +25,9 @@ class App extends Component {
             </p>
             <a href="/explore" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline">
               Explore Stores
+            </a>
+            <a href="/new" className="f6 f5-ns fw6 dib ba b--white-90 white-90 ph3 ph4-ns pv2 pv3-ns br2 ml3 grow no-underline">
+              New Listing
             </a>
           </div>
         </section>
@@ -81,6 +85,8 @@ class App extends Component {
             </section>
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }

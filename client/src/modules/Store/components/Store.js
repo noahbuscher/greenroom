@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Store extends Component {
+import { requestUpdateStore } from '../StoreActions';
+
+class Store extends Component {
+  constructor(props) {
+    super(props);
+
+    const { store } = this.props;
+
+    this.state = store;
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   getInfoUrl() {
     const { store } = this.props;
     const q = encodeURI(`${store.street}, ${store.city}, ${store.state}`);
     return `https://www.google.com/maps/search/?api=1&query=${q}`;
   }
 
+  handleChange(event) {
+    const { dispatch } = this.props;
+
+    this.setState({ status: event.target.value }, () => {
+      dispatch(requestUpdateStore(this.state));
+    });
+  }
+
   render() {
     const { store } = this.props;
+    const { status } = this.state;
 
     return (
       <div className="fl w-50 w-25-m w-25-l pr2 pb2">
@@ -35,6 +56,18 @@ export default class Store extends Component {
               >
                 Learn More
               </a>
+              <select
+                value={status}
+                onChange={this.handleChange}
+                className="ml3"
+              >
+                <option value="uncontacted">Uncontacted</option>
+                <option value="cold">Cold</option>
+                <option value="warm">Warm</option>
+                <option value="hot">Hot</option>
+                <option value="onboarded">Onboarded</option>
+                <option value="uninterested">Uninterested</option>
+              </select>
             </div>
           </div>
         </article>
@@ -44,6 +77,7 @@ export default class Store extends Component {
 }
 
 Store.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   store: PropTypes.shape({
     name: PropTypes.string.isRequired,
     street: PropTypes.string.isRequired,
@@ -53,3 +87,5 @@ Store.propTypes = {
     cuid: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+export default Store;

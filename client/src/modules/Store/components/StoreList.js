@@ -4,11 +4,11 @@ import Store from './Store';
 
 export default class StoreList extends Component {
   render() {
-    const { stores } = this.props;
+    const { stores, dispatch } = this.props;
     return (
       <div className="center cf">
         {stores.map(store => (
-          <Store key={store.cuid} store={store} />
+          <Store key={store.cuid} store={store} dispatch={dispatch} />
         ))}
       </div>
     );
@@ -16,6 +16,7 @@ export default class StoreList extends Component {
 }
 
 StoreList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   stores: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     street: PropTypes.string.isRequired,

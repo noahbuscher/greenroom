@@ -27,6 +27,7 @@ class App extends Component {
             </a>
           </div>
         </section>
+
         <section className="cf ph3 ph5-ns pb5 bg-white black-70">
           <div className="pa3">
             <h1 className="mt0 f5 f3-ns pt5">Why?</h1>

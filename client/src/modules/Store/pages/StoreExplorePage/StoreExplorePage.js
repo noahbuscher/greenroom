@@ -15,7 +15,8 @@ class StoreExplorePage extends Component {
   }
 
   render() {
-    const { stores } = this.props;
+    const { stores, dispatch } = this.props;
+
     return (
       <div>
         <Header />
@@ -29,7 +30,7 @@ class StoreExplorePage extends Component {
         <section className="cf ph5-ns pb5 pv4 bg-white black-70">
           <h2>Recently Updated</h2>
           {stores.locations.length > 0 && (
-            <StoreList stores={stores.locations} />
+            <StoreList stores={stores.locations} dispatch={dispatch} />
           )}
         </section>
       </div>
@@ -39,14 +40,19 @@ class StoreExplorePage extends Component {
 
 StoreExplorePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  stores: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    street: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
-  })).isRequired,
+  stores: PropTypes.shape({
+    locations: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        street: PropTypes.string.isRequired,
+        city: PropTypes.string.isRequired,
+        state: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired,
+        cuid: PropTypes.string.isRequired,
+      }),
+    ),
+  }).isRequired,
 };
 
 function mapStateToProps(state) {

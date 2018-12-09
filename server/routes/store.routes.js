@@ -11,4 +11,7 @@ router.route('/stores/:slug').get(StoreController.getStore);
 // Add a new Store
 router.route('/stores').post(StoreController.addStore);
 
+// Update a store
+router.route('/stores/:slug').put(StoreController.updateStore);
+
 export default router;

@@ -84,11 +84,10 @@ class StoreCreatePage extends Component {
                 value={name}
                 onChange={this.handleChangeText}
               />
-              <small id="name-desc" className="f6 black-60 db mb4">303 Dispensary</small>
             </div>
 
             <div className="measure">
-              <label htmlFor="address" className="f6 b db mb2">Address</label>
+              <label htmlFor="address" className="f6 b db mb2 mt4">Address</label>
               <input
                 id="street"
                 name="street"
@@ -98,11 +97,10 @@ class StoreCreatePage extends Component {
                 value={street}
                 onChange={this.handleChangeText}
               />
-              <small id="address-desc" className="f6 black-60 db mb4">417 Wewatta Street</small>
             </div>
 
             <div className="measure">
-              <label htmlFor="city" className="f6 b db mb2">City</label>
+              <label htmlFor="city" className="f6 b db mb2 mt4">City</label>
               <input
                 id="city"
                 name="city"
@@ -112,11 +110,10 @@ class StoreCreatePage extends Component {
                 value={city}
                 onChange={this.handleChangeText}
               />
-              <small id="city-desc" className="f6 black-60 db mb4">Denver</small>
             </div>
 
             <div className="measure">
-              <label htmlFor="state" className="f6 b db mb2">State</label>
+              <label htmlFor="state" className="f6 b db mb2 mt4">State</label>
               <input
                 id="state"
                 name="state"
@@ -126,11 +123,10 @@ class StoreCreatePage extends Component {
                 value={state}
                 onChange={this.handleChangeText}
               />
-              <small id="state-desc" className="f6 black-60 db mb4">Colorado</small>
             </div>
             <div className="measure">
               <button
-                className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline"
+                className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline mt4"
                 type="button"
                 onClick={this.handleSubmit}
               >

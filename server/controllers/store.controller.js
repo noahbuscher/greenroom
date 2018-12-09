@@ -20,6 +20,30 @@ export function getStores(req, res) {
 }
 
 /**
+ * Update a Store
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function updateStore(req, res) {
+  Store.findOne({ slug: req.params.slug }).exec((err, store) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    store.status = req.body.store.status;
+
+    store.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      res.json({ store: saved });
+    });
+  });
+}
+
+/**
  * Save a new Store
  * @param req
  * @param res
@@ -37,6 +61,7 @@ export function addStore(req, res) {
   newStore.street = sanitizeHtml(req.body.store.street);
   newStore.city = sanitizeHtml(req.body.store.city);
   newStore.state = sanitizeHtml(req.body.store.state);
+  newStore.status = 'uncontacted';
 
   const slug = randomstring.generate(6);
   newStore.cuid = cuid();

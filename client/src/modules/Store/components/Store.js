@@ -13,7 +13,7 @@ export default class Store extends Component {
                 <h1 className="f5 f4-ns mv0">{store.name}</h1>
               </div>
             </div>
-            <p classNames="f6 lh-copy measure mt2 mid-gray">
+            <p className="f6 lh-copy measure mt2 mid-gray">
               {store.street}, {store.city}, {store.state}
             </p>
           </div>

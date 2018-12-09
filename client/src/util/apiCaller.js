@@ -4,7 +4,10 @@ export const API_URL = 'http://localhost:3001/api';
 
 export default function callApi(endpoint, method = 'GET', body) {
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { Accept: 'application/json' },
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     method,
     body: JSON.stringify(body),
   })

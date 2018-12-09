@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Header from '../../../../components/Header/Header';
+
+import { addStoreRequest } from '../../StoreActions';
 
 class StoreCreatePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      toExplore: false,
       name: '',
       street: '',
       city: '',
@@ -13,9 +18,12 @@ class StoreCreatePage extends Component {
     };
 
     this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
+    const { onSubmit } = this.props;
+
     const {
       name,
       street,
@@ -23,7 +31,14 @@ class StoreCreatePage extends Component {
       state,
     } = this.state;
 
-    // Submit new store
+    const store = {
+      name,
+      street,
+      city,
+      state,
+    };
+
+    onSubmit(store).then(() => this.setState(() => ({ toExplore: true })));
   }
 
   handleChangeText(event) {
@@ -34,11 +49,16 @@ class StoreCreatePage extends Component {
 
   render() {
     const {
+      toExplore,
       name,
       street,
       city,
       state,
     } = this.state;
+
+    if (toExplore === true) {
+      return <Redirect to="/explore" />
+    }
 
     return (
       <div>
@@ -53,9 +73,10 @@ class StoreCreatePage extends Component {
         <section className="cf ph5-ns pb5 pv4 bg-white black-70">
           <form>
             <div className="measure">
-              <label for="name" className="f6 b db mb2">Store Name</label>
+              <label htmlFor="name" className="f6 b db mb2">Store Name</label>
               <input
                 id="name"
+                name="name"
                 className="input-reset ba b--black-20 pa2 mb2 db w-100"
                 type="text"
                 aria-describedby="name-desc"
@@ -66,9 +87,10 @@ class StoreCreatePage extends Component {
             </div>
 
             <div className="measure">
-              <label for="address" className="f6 b db mb2">Address</label>
+              <label htmlFor="address" className="f6 b db mb2">Address</label>
               <input
                 id="street"
+                name="street"
                 className="input-reset ba b--black-20 pa2 mb2 db w-100"
                 type="text"
                 aria-describedby="address-desc"
@@ -79,9 +101,10 @@ class StoreCreatePage extends Component {
             </div>
 
             <div className="measure">
-              <label for="city" className="f6 b db mb2">City</label>
+              <label htmlFor="city" className="f6 b db mb2">City</label>
               <input
                 id="city"
+                name="city"
                 className="input-reset ba b--black-20 pa2 mb2 db w-100"
                 type="text"
                 aria-describedby="city-desc"
@@ -92,9 +115,10 @@ class StoreCreatePage extends Component {
             </div>
 
             <div className="measure">
-              <label for="state" className="f6 b db mb2">State</label>
+              <label htmlFor="state" className="f6 b db mb2">State</label>
               <input
                 id="state"
+                name="state"
                 className="input-reset ba b--black-20 pa2 mb2 db w-100"
                 type="text"
                 aria-describedby="state-desc"
@@ -104,7 +128,11 @@ class StoreCreatePage extends Component {
               <small id="state-desc" className="f6 black-60 db mb2">Ex: Colorado</small>
             </div>
             <div className="measure">
-              <button className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline">
+              <button
+                className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline"
+                type="button"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </button>
             </div>
@@ -115,4 +143,8 @@ class StoreCreatePage extends Component {
   }
 }
 
-export default StoreCreatePage;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: data => dispatch(addStoreRequest(data)),
+});
+
+export default connect(null, mapDispatchToProps)(StoreCreatePage);

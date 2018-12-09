@@ -14,7 +14,9 @@ export function addStore(store) {
 
 export function addStoreRequest(store) {
   return (dispatch) => {
-    return callApi('stores', 'post', { store }).then(res => dispatch(addStore(res.json.store)));
+    return callApi('stores', 'POST', { store }).then(res => {
+      dispatch(addStore(res.json.store));
+    });
   };
 }
 

@@ -22,6 +22,7 @@ export function addStoreRequest(store) {
         'Content-Type': 'application/json',
       },
       'POST',
+      {},
       JSON.stringify({ store }),
     ).then((res) => { dispatch(addStore(res.json.store)); });
   };
@@ -43,6 +44,7 @@ export function requestUpdateStore(store) {
         'Content-Type': 'application/json',
       },
       'PUT',
+      {},
       JSON.stringify({ store }),
     ).then(res => dispatch(updateStore(res.json.store)));
   };
@@ -56,19 +58,22 @@ export function requestUploadStore(data) {
         Accept: 'application/json',
       },
       'POST',
+      {},
       data,
     ).then(res => dispatch(addStore(res.json.stores)));
   };
 }
 
-export function addStores(stores) {
+export function addStores(stores, fields) {
   return {
     type: ADD_STORES,
     stores,
+    fields,
   };
 }
 
-export function fetchStores() {
+export function fetchStores(filters) {
+
   return (dispatch) => {
     return callApi(
       'stores',
@@ -76,7 +81,9 @@ export function fetchStores() {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    ).then((res) => { dispatch(addStores(res.json.stores)); });
+      'GET',
+      filters,
+    ).then((res) => { dispatch(addStores(res.json.stores, res.json.fields)); });
   };
 }
 

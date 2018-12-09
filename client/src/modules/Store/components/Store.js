@@ -63,7 +63,7 @@ class Store extends Component {
             <div className="absolute bottom-0 left-0 right-0 pa1 pl3 pr3 pb3">
               <a
                 href={this.getInfoUrl()}
-                className="f7 link dim br2 ba ph3 pv2 mb2 dib dark-green"
+                className="f7 link dim br2 ba ph3 pv2 mb2 dib dark-green mr2"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -74,12 +74,12 @@ class Store extends Component {
                 onChange={this.handleChange}
                 className="ml3"
               >
-                <option value="uncontacted">Uncontacted</option>
-                <option value="cold">Cold</option>
-                <option value="warm">Warm</option>
-                <option value="hot">Hot</option>
-                <option value="onboarded">Onboarded</option>
-                <option value="uninterested">Uninterested</option>
+                <option value="Uncontacted">Uncontacted</option>
+                <option value="Cold">Cold</option>
+                <option value="Warm">Warm</option>
+                <option value="Hot">Hot</option>
+                <option value="Onboarded">Onboarded</option>
+                <option value="Uninterested">Uninterested</option>
               </select>
             </div>
           </div>

@@ -10,13 +10,42 @@ import '../../../../index.css';
 import { fetchStores } from '../../StoreActions';
 
 class StoreExplorePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filters: {
+        city: 'all',
+        state: 'all',
+        status: 'all',
+      },
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchStores());
+    dispatch(fetchStores(this.state.filters));
   }
+
+  handleChange(event) {
+    const { dispatch } = this.props;
+    const stateFilters = this.state.filters;
+
+    const filters = Object.assign({}, stateFilters);
+    filters[event.target.name] = event.target.value;
+
+    this.setState({ filters: filters }, () => {
+      dispatch(fetchStores(this.state.filters));
+    });
+  }
+
 
   render() {
     const { stores, dispatch } = this.props;
+    const fields = stores.fields || { state: [], city: [], status: [] };
+    const { filters } = this.state;
 
     return (
       <div>
@@ -31,6 +60,35 @@ class StoreExplorePage extends Component {
           <a href="/new" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 mb4 grow no-underline">
             New Listing
           </a>
+        </section>
+
+        <section className="cf ph5-ns pv4 pb5 bg-light-gray black-70">
+          <h4>Sort Listings</h4>
+          <div>
+            <label htmlFor="state" className="f6 mb2 mr2">State:</label>
+            <select className="mr3" id="state" name="state" value={filters.state} onChange={this.handleChange}>
+              <option value="all">All</option>
+              {fields.state.map(function(o){
+                return <option value={o} key={o}>{o}</option>;
+              })}
+            </select>
+
+            <label htmlFor="city" className="f6 mb2 mr2">City:</label>
+            <select className="mr3" id="city" name="city" value={filters.city} onChange={this.handleChange}>
+              <option value="all">All</option>
+              {fields.city.map(function(o){
+                return <option value={o} key={o}>{o}</option>;
+              })}
+            </select>
+
+            <label htmlFor="status" className="f6 mb2 mr2">Status:</label>
+            <select className="mr3" id="status" name="status" value={filters.status} onChange={this.handleChange}>
+              <option value="all">All</option>
+              {fields.status.map(function(o){
+                return <option value={o} key={o}>{o}</option>;
+              })}
+            </select>
+          </div>
         </section>
 
         <section className="cf ph5-ns pb5 pv4 bg-white black-70">

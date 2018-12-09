@@ -17,6 +17,9 @@ export default class Header extends React.Component {
             <a href="/new" className="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib">
               Add Listing
             </a>
+            <a href="/new" className="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib">
+              Learn
+            </a>
           </nav>
         </div>
       </header>

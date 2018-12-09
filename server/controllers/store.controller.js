@@ -12,12 +12,47 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getStores(req, res) {
-  Store.find().sort('-dateAdded').exec((err, stores) => {
+  let q = {};
+
+  for (const prop in req.query) {
+    if (req.query.hasOwnProperty(prop)) {
+        if (req.query[prop] !== 'all') {
+          q[prop] = req.query[prop];
+        }
+    }
+  }
+
+  console.log(q);
+
+  Store.find(q).sort('-dateAdded').exec((err, stores) => {
     if (err) {
       return res.status(500).send(err);
     }
 
-    res.status(200).json({ stores });
+    Store
+      .aggregate([
+        {
+          $group: {
+            _id: null,
+            city: {$addToSet: '$city'},
+            state: {$addToSet: '$state'},
+            status: {$addToSet: '$status'},
+          }
+        }
+      ])
+      .exec(function (err, distinct) {
+        if (err) {
+          return res.status(500).send(err);
+        }
+
+        const d = {
+          city: distinct[0].city,
+          state: distinct[0].state,
+          status: distinct[0].status,
+        };
+
+        res.status(200).json({ stores, fields: d });
+      });
   });
 }
 

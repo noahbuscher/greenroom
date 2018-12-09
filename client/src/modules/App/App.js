@@ -27,7 +27,7 @@ class App extends Component {
               Explore Stores
             </a>
             <a href="/new" className="f6 f5-ns fw6 dib ba b--white-90 white-90 ph3 ph4-ns pv2 pv3-ns br2 ml3 grow no-underline">
-              New Listing
+              Add Listing
             </a>
           </div>
         </section>

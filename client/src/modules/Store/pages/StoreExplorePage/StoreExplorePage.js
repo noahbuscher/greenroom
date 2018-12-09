@@ -64,7 +64,7 @@ class StoreExplorePage extends Component {
 
         <section className="cf ph5-ns pv4 pb5 bg-light-gray black-70">
           <h4>Sort Listings</h4>
-          <div>
+          <div className="pb3">
             <label htmlFor="state" className="f6 mb2 mr2">State:</label>
             <select className="mr3" id="state" name="state" value={filters.state} onChange={this.handleChange}>
               <option value="all">All</option>

@@ -24,7 +24,7 @@ export function getStores(req, res) {
 
   console.log(q);
 
-  Store.find(q).sort('-dateAdded').exec((err, stores) => {
+  Store.find(q).sort({ name:'asc' }).exec((err, stores) => {
     if (err) {
       return res.status(500).send(err);
     }
@@ -53,9 +53,9 @@ export function getStores(req, res) {
 
         if (distinct[0]) {
           d = {
-            city: distinct[0].city,
-            state: distinct[0].state,
-            status: distinct[0].status,
+            city: distinct[0].city.sort(),
+            state: distinct[0].state.sort(),
+            status: distinct[0].status.sort(),
           };
         }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Store extends Component {
   render() {
@@ -22,3 +23,14 @@ export default class Store extends Component {
     );
   }
 }
+
+Store.propTypes = {
+  store: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
+  }).isRequired,
+};

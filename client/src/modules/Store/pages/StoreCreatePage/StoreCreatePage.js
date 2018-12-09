@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from '../../../../components/Header/Header';
@@ -57,7 +58,7 @@ class StoreCreatePage extends Component {
     } = this.state;
 
     if (toExplore === true) {
-      return <Redirect to="/explore" />
+      return <Redirect to="/explore" />;
     }
 
     return (
@@ -142,6 +143,10 @@ class StoreCreatePage extends Component {
     );
   }
 }
+
+StoreCreatePage.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: data => dispatch(addStoreRequest(data)),

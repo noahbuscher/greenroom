@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import StoreList from '../../components/StoreList';
 import Header from '../../../../components/Header/Header';
 import '../../../../index.css';
@@ -35,6 +36,18 @@ class StoreExplorePage extends Component {
     );
   }
 }
+
+StoreExplorePage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  stores: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 function mapStateToProps(state) {
   return {

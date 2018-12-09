@@ -1,5 +1,6 @@
 import { ADD_STORE, ADD_STORES } from './StoreActions';
 
+// Default state
 const initialState = {
   locations: [],
 };

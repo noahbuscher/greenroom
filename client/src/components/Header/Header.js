@@ -14,9 +14,6 @@ export default class Header extends React.Component {
             <a href="/explore" className="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib">
               Explore
             </a>
-            <a href="/map" className="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib">
-              Map
-            </a>
             <a href="/new" className="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib">
               Add Listing
             </a>

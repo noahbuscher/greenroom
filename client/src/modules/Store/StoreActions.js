@@ -17,6 +17,10 @@ export function addStoreRequest(store) {
   return (dispatch) => {
     return callApi(
       'stores',
+      {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       'POST',
       JSON.stringify({ store }),
     ).then((res) => { dispatch(addStore(res.json.store)); });
@@ -35,7 +39,7 @@ export function requestUpdateStore(store) {
     return callApi(
       `stores/${store.slug}`,
       {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       'PUT',
@@ -45,13 +49,11 @@ export function requestUpdateStore(store) {
 }
 
 export function requestUploadStore(data) {
-  console.log(data);
-
   return (dispatch) => {
     return callApi(
       'stores/upload',
       {
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       'POST',
       data,
@@ -71,7 +73,7 @@ export function fetchStores() {
     return callApi(
       'stores',
       {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     ).then((res) => { dispatch(addStores(res.json.stores)); });
@@ -83,7 +85,7 @@ export function fetchStore(slug) {
     return callApi(
       `stores/${slug}`,
       {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     ).then(res => dispatch(addStore(res.json.store)));

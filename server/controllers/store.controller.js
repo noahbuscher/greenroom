@@ -1,5 +1,7 @@
 import Store from '../models/store.model';
 import cuid from 'cuid';
+import csv from 'csvtojson';
+import fs from 'fs';
 import randomstring from 'randomstring';
 import sanitizeHtml from 'sanitize-html';
 
@@ -74,6 +76,58 @@ export function addStore(req, res) {
     res.json({ store: saved });
   });
 }
+
+/**
+ * Upload stores from CSV
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function uploadStore(req, res) {
+  if (!req.file) {
+    return res.status(403).end();
+  }
+
+  let stores = [];
+
+  // Read CSV file
+  csv()
+    .fromFile(req.file.path)
+    .then((rawStores) => {
+
+      // Iterate over all stores
+      rawStores.forEach(function (store) {
+        console.log(store);
+        const newStore = new Store();
+
+        // Let's sanitize inputs
+        newStore.name = sanitizeHtml(store.name);
+        newStore.street = sanitizeHtml(store.street);
+        newStore.city = sanitizeHtml(store.city);
+        newStore.state = sanitizeHtml(store.state);
+        newStore.status = 'uncontacted';
+
+        const slug = randomstring.generate(6);
+        newStore.cuid = cuid();
+        newStore.slug = slug;
+
+        stores.push(newStore);
+      });
+
+      fs.unlink(req.file.path, (err) => {
+        if (err) throw err;
+
+        // Save all stores
+        Store.insertMany(stores, (err, docs) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+          res.json({ stores: docs });
+        });
+      });
+    });
+}
+
 
 /**
  * Get a single Store

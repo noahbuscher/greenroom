@@ -9,7 +9,10 @@ class Store extends Component {
 
     const { store } = this.props;
 
-    this.state = store;
+    this.state = {
+      store,
+      statusColor: getStatusColor(store.status),
+    };
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -22,21 +25,32 @@ class Store extends Component {
 
   handleChange(event) {
     const { dispatch } = this.props;
+    const stateStore = this.state.store;
 
-    this.setState({ status: event.target.value }, () => {
-      dispatch(requestUpdateStore(this.state));
+    const store = Object.assign({}, stateStore);
+    store.status = event.target.value;
+
+    this.setState({ store: store, statusColor: getStatusColor(event.target.value) }, () => {
+      dispatch(requestUpdateStore(this.state.store));
+
     });
   }
 
   render() {
     const { store } = this.props;
-    const { status } = this.state;
+    const { statusColor } = this.state;
+    const stateStore = this.state.store;
 
     return (
-      <div className="fl w-50 w-25-m w-25-l pr2 pb2">
-        <article className="br2 ba b--black-10 w-100 fl">
-          <div className="db w-100 br2 bg-light-gray br--top pa1 pl3 pr3">
-            <h2 className="f5 black-70">{store.city}, {store.state}</h2>
+      <div className="fl w-50 w-25-m w-25-l pr2 pb2 relative">
+        <article className="br2 ba b--black-10 w-100 h5 fl">
+          <div className={`db w-100 br2 br--top pa1 pl3 pr3 ${statusColor}`}>
+            <h2 className="f5 black-70 w-100">
+              {store.city}, {store.state}
+              {stateStore.status === 'onboarded' && (
+                <span className="tr" role="img" aria-label="Liftoff"> 🚀</span>
+              )}
+            </h2>
           </div>
           <div className="pa2 ph3-ns pb3-ns pa3">
             <div className="dt w-100 mt1">
@@ -47,7 +61,7 @@ class Store extends Component {
             <p className="f6 lh-copy measure mt2 mid-gray">
               {store.street}, {store.city}, {store.state}
             </p>
-            <div>
+            <div className="absolute bottom-0 left-0 right-0 pa1 pl3 pr3 pb3">
               <a
                 href={this.getInfoUrl()}
                 className="f7 link dim br1 ba ph3 pv2 mb2 dib dark-green"
@@ -57,7 +71,7 @@ class Store extends Component {
                 Learn More
               </a>
               <select
-                value={status}
+                value={stateStore.status}
                 onChange={this.handleChange}
                 className="ml3"
               >
@@ -73,6 +87,25 @@ class Store extends Component {
         </article>
       </div>
     );
+  }
+}
+
+function getStatusColor(state) {
+  switch (state) {
+    case 'uncontacted':
+      return 'bg-light-gray';
+    case 'cold':
+      return 'bg-lightest-blue';
+    case 'warm':
+      return 'bg-orange';
+    case 'hot':
+      return 'bg-red';
+    case 'onboarded':
+      return 'bg-green';
+    case 'uninterested':
+      return 'bg-light-purple';
+    default:
+      return 'bg-light-gray';
   }
 }
 

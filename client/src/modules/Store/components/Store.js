@@ -32,7 +32,6 @@ class Store extends Component {
 
     this.setState({ store: store, statusColor: getStatusColor(event.target.value) }, () => {
       dispatch(requestUpdateStore(this.state.store));
-
     });
   }
 
@@ -64,7 +63,7 @@ class Store extends Component {
             <div className="absolute bottom-0 left-0 right-0 pa1 pl3 pr3 pb3">
               <a
                 href={this.getInfoUrl()}
-                className="f7 link dim br1 ba ph3 pv2 mb2 dib dark-green"
+                className="f7 link dim br2 ba ph3 pv2 mb2 dib dark-green"
                 rel="noopener noreferrer"
                 target="_blank"
               >

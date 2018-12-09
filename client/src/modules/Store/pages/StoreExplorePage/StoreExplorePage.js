@@ -29,6 +29,7 @@ class StoreExplorePage extends Component {
 
         <section className="cf ph5-ns pb5 pv4 bg-white black-70">
           <h2>Recently Updated</h2>
+          <pre className="pb3">{stores.locations.length} Entries Loaded</pre>
           {stores.locations.length > 0 && (
             <StoreList stores={stores.locations} dispatch={dispatch} />
           )}

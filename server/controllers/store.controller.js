@@ -45,11 +45,21 @@ export function getStores(req, res) {
           return res.status(500).send(err);
         }
 
-        const d = {
-          city: distinct[0].city,
-          state: distinct[0].state,
-          status: distinct[0].status,
+        let d = {
+          city: [],
+          state: [],
+          status: [],
         };
+
+        if (distinct[0]) {
+          d = {
+            city: distinct[0].city,
+            state: distinct[0].state,
+            status: distinct[0].status,
+          };
+        }
+
+        console.log(distinct);
 
         res.status(200).json({ stores, fields: d });
       });
@@ -98,7 +108,7 @@ export function addStore(req, res) {
   newStore.street = sanitizeHtml(req.body.store.street);
   newStore.city = sanitizeHtml(req.body.store.city);
   newStore.state = sanitizeHtml(req.body.store.state);
-  newStore.status = 'uncontacted';
+  newStore.status = 'Uncontacted';
 
   const slug = randomstring.generate(6);
   newStore.cuid = cuid();
@@ -140,7 +150,7 @@ export function uploadStore(req, res) {
         newStore.street = sanitizeHtml(store.street);
         newStore.city = sanitizeHtml(store.city);
         newStore.state = sanitizeHtml(store.state);
-        newStore.status = 'uncontacted';
+        newStore.status = 'Uncontacted';
 
         const slug = randomstring.generate(6);
         newStore.cuid = cuid();

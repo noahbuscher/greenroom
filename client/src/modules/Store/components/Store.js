@@ -46,7 +46,7 @@ class Store extends Component {
           <div className={`db w-100 br2 br--top pa1 pl3 pr3 ${statusColor}`}>
             <h2 className="f5 fw5 black-70 w-100">
               {store.city}, {store.state}
-              {stateStore.status === 'onboarded' && (
+              {stateStore.status === 'Onboarded' && (
                 <span className="tr" role="img" aria-label="Liftoff"> 🚀</span>
               )}
             </h2>
@@ -91,17 +91,17 @@ class Store extends Component {
 
 function getStatusColor(state) {
   switch (state) {
-    case 'uncontacted':
+    case 'Uncontacted':
       return 'bg-light-gray';
-    case 'cold':
+    case 'Cold':
       return 'bg-lightest-blue';
-    case 'warm':
+    case 'Warm':
       return 'bg-orange';
-    case 'hot':
+    case 'Hot':
       return 'bg-red';
-    case 'onboarded':
+    case 'Onboarded':
       return 'bg-green';
-    case 'uninterested':
+    case 'Uninterested':
       return 'bg-light-purple';
     default:
       return 'bg-light-gray';

@@ -84,7 +84,7 @@ class StoreCreatePage extends Component {
                 value={name}
                 onChange={this.handleChangeText}
               />
-              <small id="name-desc" className="f6 black-60 db mb2">Ex: 303 Dispensary</small>
+              <small id="name-desc" className="f6 black-60 db mb4">303 Dispensary</small>
             </div>
 
             <div className="measure">
@@ -98,7 +98,7 @@ class StoreCreatePage extends Component {
                 value={street}
                 onChange={this.handleChangeText}
               />
-              <small id="address-desc" className="f6 black-60 db mb2">Ex. 417 Wewatta Street</small>
+              <small id="address-desc" className="f6 black-60 db mb4">417 Wewatta Street</small>
             </div>
 
             <div className="measure">
@@ -112,7 +112,7 @@ class StoreCreatePage extends Component {
                 value={city}
                 onChange={this.handleChangeText}
               />
-              <small id="city-desc" className="f6 black-60 db mb2">Ex: Denver</small>
+              <small id="city-desc" className="f6 black-60 db mb4">Denver</small>
             </div>
 
             <div className="measure">
@@ -126,7 +126,7 @@ class StoreCreatePage extends Component {
                 value={state}
                 onChange={this.handleChangeText}
               />
-              <small id="state-desc" className="f6 black-60 db mb2">Ex: Colorado</small>
+              <small id="state-desc" className="f6 black-60 db mb4">Colorado</small>
             </div>
             <div className="measure">
               <button

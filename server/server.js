@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import config from './config';
+import path from 'path';
 
 // Create app instance
 const app = express();
@@ -32,6 +33,12 @@ app.use(function(req, res, next) {
 // Link routes
 import stores from './routes/store.routes';
 app.use('/api', stores);
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 // Start app
 app.listen(config.port, (error) => {

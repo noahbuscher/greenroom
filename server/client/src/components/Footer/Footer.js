@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
             <a href="/" className="black-70 link hover-blue b dib mr3 mb3">Home</a>
             <a href="/explore" className="black-70 link hover-blue b dib mr3 mb3">Explore</a>
             <a href="/new" className="black-70 link hover-blue b dib mr3 mb3">Add Listing</a>
-            <a href="/new" className="black-70 link hover-blue b dib mr3 mb3">Learn</a>
+            <a href="https://github.com/noahbuscher/greenroom/wiki/Learn" className="black-70 link hover-blue b dib mr3 mb3">Learn</a>
           </div>
           <article className="v-top">
             <a

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export const API_URL = 'http://localhost:3001/api';
+export const API_URL = '/api';
 
 function buildUrl(url, parameters) {
   let qs = '';

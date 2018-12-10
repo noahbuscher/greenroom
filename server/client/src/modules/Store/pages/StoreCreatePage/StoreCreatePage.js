@@ -34,8 +34,10 @@ class StoreCreatePage extends Component {
     const { onUpload } = this.props;
     const { selectedFile } = this.state;
 
+    if (!selectedFile) return;
+
     const data = new FormData();
-    data.append('csv', selectedFile, 'csv');
+    data.append('csv', selectedFile, selectedFile.name);
 
     onUpload(data).then(() => this.setState(() => ({ toExplore: true })));
   }
@@ -57,7 +59,16 @@ class StoreCreatePage extends Component {
       state,
     };
 
-    onSubmit(store).then(() => this.setState(() => ({ toExplore: true })));
+    let invalid = false;
+
+    if (store.name === '') invalid = true;
+    if (store.street === '') invalid = true;
+    if (store.city === '') invalid = true;
+    if (store.state === '') invalid = true;
+
+    if (!invalid) {
+      onSubmit(store).then(() => this.setState(() => ({ toExplore: true })));
+    }
   }
 
   handleChangeText(event) {
@@ -97,7 +108,7 @@ class StoreCreatePage extends Component {
               This is helpful for keeping the database up to date with indivigual
               dispensary entries.
             </p>
-            <form>
+            <form noValidate>
               <div className="measure">
                 <label htmlFor="name" className="f6 b db mb2">Store Name</label>
                 <input
@@ -170,7 +181,13 @@ class StoreCreatePage extends Component {
               <span className="code bg-yellow">name, street, city, state</span>.
             </p>
             <form onSubmit={this.handleUpload}>
-              <input name="csv" id="csv" onChange={this.handleSelectedFile} type="file" />
+              <input
+                name="csv"
+                id="csv"
+                onChange={this.handleSelectedFile}
+                type="file"
+                accept=".csv"
+              />
               <button
                 className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 grow no-underline mt4"
                 type="button"

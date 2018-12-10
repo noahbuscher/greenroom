@@ -25,9 +25,11 @@ import stores from './routes/store.routes';
 app.use('/api', stores);
 
 // Serve static assets
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
-})
+if (config.ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  });
+}
 
 // Start app
 app.listen(config.port, (error) => {

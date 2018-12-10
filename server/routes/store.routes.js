@@ -1,8 +1,14 @@
 import { Router } from 'express';
+import path from 'path';
 import multer from 'multer';
 import * as StoreController from '../controllers/store.controller';
+
 const router = new Router();
-const upload = multer({ dest: './tmpuploads/' });
+const upload = multer(
+  {
+    dest: './tmpuploads/',
+  }
+);
 
 // Get all Stores
 router.route('/stores').get(StoreController.getStores);

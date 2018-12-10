@@ -14,6 +14,7 @@ import sanitizeHtml from 'sanitize-html';
 export function getStores(req, res) {
   let q = {};
 
+  // Add all filters to Query, ignoring "all"
   for (const prop in req.query) {
     if (req.query.hasOwnProperty(prop)) {
         if (req.query[prop] !== 'all') {
@@ -22,13 +23,13 @@ export function getStores(req, res) {
     }
   }
 
-  console.log(q);
-
+  // Find all Stores that match Query
   Store.find(q).sort({ name:'asc' }).exec((err, stores) => {
     if (err) {
       return res.status(500).send(err);
     }
 
+    // Find all unique field values
     Store
       .aggregate([
         {
@@ -45,6 +46,7 @@ export function getStores(req, res) {
           return res.status(500).send(err);
         }
 
+        // Add fields to res
         let d = {
           city: [],
           state: [],
@@ -59,8 +61,6 @@ export function getStores(req, res) {
           };
         }
 
-        console.log(distinct);
-
         res.status(200).json({ stores, fields: d });
       });
   });
@@ -73,12 +73,19 @@ export function getStores(req, res) {
  * @returns void
  */
 export function updateStore(req, res) {
+
+  // Find Store by slug
   Store.findOne({ slug: req.params.slug }).exec((err, store) => {
     if (err) {
       return res.status(500).send(err);
     }
 
-    store.status = req.body.store.status;
+    // Let's sanitize inputs
+    store.name = sanitizeHtml(req.body.store.name);
+    store.street = sanitizeHtml(req.body.store.street);
+    store.city = sanitizeHtml(req.body.store.city);
+    store.state = sanitizeHtml(req.body.store.state);
+    store.status = sanitizeHtml(req.body.store.status);
 
     store.save((err, saved) => {
       if (err) {
@@ -110,6 +117,7 @@ export function addStore(req, res) {
   newStore.state = sanitizeHtml(req.body.store.state);
   newStore.status = 'Uncontacted';
 
+  // Generate random slug
   const slug = randomstring.generate(6);
   newStore.cuid = cuid();
   newStore.slug = slug;
@@ -142,7 +150,6 @@ export function uploadStore(req, res) {
 
       // Iterate over all stores
       rawStores.forEach(function (store) {
-        console.log(store);
         const newStore = new Store();
 
         // Let's sanitize inputs
@@ -152,6 +159,7 @@ export function uploadStore(req, res) {
         newStore.state = sanitizeHtml(store.state);
         newStore.status = 'Uncontacted';
 
+        // Generate random slug
         const slug = randomstring.generate(6);
         newStore.cuid = cuid();
         newStore.slug = slug;
@@ -159,6 +167,7 @@ export function uploadStore(req, res) {
         stores.push(newStore);
       });
 
+      // Delete tmp CSV file
       fs.unlink(req.file.path, (err) => {
         if (err) throw err;
 
@@ -167,6 +176,7 @@ export function uploadStore(req, res) {
           if (err) {
             return res.status(500).send(err);
           }
+
           res.json({ stores: docs });
         });
       });
@@ -181,6 +191,8 @@ export function uploadStore(req, res) {
  * @returns void
  */
 export function getStore(req, res) {
+
+  // Find one Store by slug
   Store.findOne({ slug: req.params.slug }).exec((err, store) => {
     if (err) {
       return res.status(500).send(err);

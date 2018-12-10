@@ -18,24 +18,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(logger('dev'));
-
-/**
- * NOTE: This allows CORS as dev server/client
- * are on diff ports
- */
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Link routes
 import stores from './routes/store.routes';
 app.use('/api', stores);
 
-app.use(express.static(path.join(__dirname, 'client/build')))
-
+// Serve static assets
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
@@ -43,6 +32,6 @@ app.get('*', (req, res) => {
 // Start app
 app.listen(config.port, (error) => {
   if (!error) {
-    console.log(`Server is running on port: ${config.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`Server is running on port: ${config.port}! Build something amazing!`);
   }
 });

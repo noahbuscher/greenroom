@@ -18,7 +18,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Link routes
 import stores from './routes/store.routes';
@@ -26,6 +25,7 @@ app.use('/api', stores);
 
 // Serve static assets
 if (config.ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'))
   });

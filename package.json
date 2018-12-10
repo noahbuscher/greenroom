@@ -8,6 +8,7 @@
     "start:dev": "concurrently \"yarn start\" \"cd server/client && yarn start\"",
     "heroku-postbuild": "cd server/client && yarn install && yarn run build"
   },
+  "proxy": "https://greenroomapp.heroku.com",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",

@@ -24,7 +24,8 @@ import stores from './routes/store.routes';
 app.use('/api', stores);
 
 // Serve static assets
-if (config.ENV === 'production') {
+console.log(config.NODE_ENV);
+if (config.env === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'))

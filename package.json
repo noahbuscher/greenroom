@@ -4,11 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cd server && nodemon --exec babel-node --presets env server.js",
-    "start:dev": "concurrently \"yarn start\" \"cd server/client && yarn start\"",
+    "start": "cd server && babel-node --presets env server.js",
+    "start:dev": "concurrently --kill-others-on-fail \"yarn start\" \"cd server/client && yarn start\"",
     "heroku-postbuild": "cd server/client && yarn install && yarn run build"
   },
-  "proxy": "https://greenroomapp.heroku.com",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",

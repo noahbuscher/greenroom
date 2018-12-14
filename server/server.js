@@ -24,11 +24,12 @@ import stores from './routes/store.routes';
 app.use('/api', stores);
 
 // Serve static assets
-console.log(config.NODE_ENV);
-if (config.env === 'production') {
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
 

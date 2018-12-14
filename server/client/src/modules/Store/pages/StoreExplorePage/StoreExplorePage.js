@@ -62,36 +62,42 @@ class StoreExplorePage extends Component {
           </a>
         </section>
 
-        <section className="cf ph5-ns pv4 pb5 bg-light-gray black-70">
+        <section className="cf ph5-ns ph3 pv4 bg-light-gray black-70">
           <h4>Sort Listings</h4>
           <div className="pb3">
-            <label htmlFor="state" className="f6 mb2 mr2">State:</label>
-            <select className="mr3" id="state" name="state" value={filters.state} onChange={this.handleChange}>
-              <option value="all">All</option>
-              {fields.state.map(function(o){
-                return <option value={o} key={o}>{o}</option>;
-              })}
-            </select>
+            <div className="db dib-ns">
+              <label htmlFor="state" className="f6 mb2 mr2">State:</label>
+              <select className="mr3" id="state" name="state" value={filters.state} onChange={this.handleChange}>
+                <option value="all">All</option>
+                {fields.state.map(function(o){
+                  return <option value={o} key={o}>{o}</option>;
+                })}
+              </select>
+            </div>
 
-            <label htmlFor="city" className="f6 mb2 mr2">City:</label>
-            <select className="mr3" id="city" name="city" value={filters.city} onChange={this.handleChange}>
-              <option value="all">All</option>
-              {fields.city.map(function(o){
-                return <option value={o} key={o}>{o}</option>;
-              })}
-            </select>
+            <div className="db-ns dib-ns">
+              <label htmlFor="city" className="f6 mb2 mr2">City:</label>
+              <select className="mr3" id="city" name="city" value={filters.city} onChange={this.handleChange}>
+                <option value="all">All</option>
+                {fields.city.map(function(o){
+                  return <option value={o} key={o}>{o}</option>;
+                })}
+              </select>
+            </div>
 
-            <label htmlFor="status" className="f6 mb2 mr2">Status:</label>
-            <select className="mr3" id="status" name="status" value={filters.status} onChange={this.handleChange}>
-              <option value="all">All</option>
-              {fields.status.map(function(o){
-                return <option value={o} key={o}>{o}</option>;
-              })}
-            </select>
+            <div className="db-ns dib-ns">
+              <label htmlFor="status" className="f6 mb2 mr2">Status:</label>
+              <select className="mr3" id="status" name="status" value={filters.status} onChange={this.handleChange}>
+                <option value="all">All</option>
+                {fields.status.map(function(o){
+                  return <option value={o} key={o}>{o}</option>;
+                })}
+              </select>
+            </div>
           </div>
         </section>
 
-        <section className="cf ph5-ns pb5 pv4 bg-white black-70">
+        <section className="cf ph3 ph5-ns pv4 bg-white black-70">
           <h2>Recently Updated</h2>
           <pre className="pb3">{stores.locations.length} Entries Loaded</pre>
           {stores.locations.length > 0 && (

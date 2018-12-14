@@ -60,7 +60,7 @@ class Store extends Component {
             <p className="f6 lh-copy measure mt2 mid-gray">
               {store.street}, {store.city}, {store.state}
             </p>
-            <div className="absolute bottom-0 left-0 right-0 pa1 pl3 pr3 pb3">
+            <div className="absolute bottom-0 left-0 right-0 pa1 pl3 pr3 pb3 dib-ns">
               <a
                 href={this.getInfoUrl()}
                 className="f7 link dim br2 ba ph3 pv2 mb2 dib dark-green mr2"
@@ -72,7 +72,7 @@ class Store extends Component {
               <select
                 value={stateStore.status}
                 onChange={this.handleChange}
-                className="ml3"
+                className="ml3-ns ml0 dib-ns"
               >
                 <option value="Uncontacted">Uncontacted</option>
                 <option value="Cold">Cold</option>

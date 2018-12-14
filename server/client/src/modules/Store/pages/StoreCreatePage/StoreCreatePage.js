@@ -94,15 +94,18 @@ class StoreCreatePage extends Component {
       <div>
         <Header />
 
-        <div className="cf">
-          <section className="cf ph3 ph5-ns pb3 bg-green black-70">
-            <h2 className="f3 f1-ns fw6 mb2 lh-copy">Submit</h2>
-            <p className="mv0 f5 pb4 lh-copy measure">
-              Add a new dispensary to the database.
-            </p>
-          </section>
+        <section className="cf ph3 ph5-ns pb3 bg-green black-70">
+          <h2 className="f3 f1-ns fw6 mb2 lh-copy">Submit</h2>
+          <p className="mv0 f5 pb4 lh-copy measure">
+            Add a new dispensary to the database.
+          </p>
+          <a href="/explore" className="f6 f5-ns fw6 dib ba b--black-20 bg-dark-green white ph3 ph4-ns pv2 pv3-ns br2 mb4 grow no-underline">
+            Explore Listings
+          </a>
+        </section>
 
-          <section className="fl w-50 pa2 cf ph5-ns pb5 pv4 bg-white black-70">
+        <div className="cf">
+          <section className="fl w-100 w-50-ns pa2 ph3 ph5-ns pb5 pv4 bg-white black-70">
             <h2>Add Listing</h2>
             <p className="mv0 f5 pb4 lh-copy measure">
               This is helpful for keeping the database up to date with indivigual
@@ -173,7 +176,7 @@ class StoreCreatePage extends Component {
             </form>
           </section>
 
-          <section className="fl w-50 pa2 cf ph5-ns pb5 pv4 bg-white black-70">
+          <section className="fl w-100 w-50-ns pa2 ph3 ph5-ns pb5 pv4 bg-white black-70">
             <h2>Upload CSV</h2>
             <p className="mv0 f5 pb4 lh-copy measure">
               Good for importing large data sets. Make sure your CSV file has
